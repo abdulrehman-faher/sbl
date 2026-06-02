@@ -115,7 +115,7 @@
     .hero { position: relative; min-height: 100dvh; display: flex; align-items: center; overflow: hidden; }
     .hero-bg-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; filter: brightness(0.35); animation: scaleImage 1.8s var(--transition); }
     [data-theme="light"] .hero-bg-img { filter: brightness(0.85) contrast(1.05); }
-    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to right, var(--bg) 40%, transparent 100%); z-index: 1; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to right, var(--bg) 10%, transparent 100%); z-index: 1; }
     .hero-content { position: relative; z-index: 2; padding-top: var(--space-24); max-width: 800px; animation: heroFadeUp 1.2s var(--transition) both; }
     .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.75rem; font-size: var(--text-xs); font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: var(--space-6); }
     .hero-title { font-family: var(--font-display); font-size: var(--text-hero); font-style: italic; line-height: 1.05; color: var(--text); margin-bottom: var(--space-8); }
@@ -236,6 +236,50 @@
     @media(max-width: 600px) {
       .footer-grid { grid-template-columns: 1fr; }
     }
+    
+    
+    /* Hero Slider Layout */
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* Ensures it stays firmly behind the content and overlay */
+}
+
+/* Ensure images cover the area completely and transition smoothly */
+.hero .hero-bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out; /* Smooth 1.5-second cross-fade */
+}
+
+/* Active class applied via JS */
+.hero .hero-bg-img.active {
+  opacity: 1;
+}
+
+/* Ensure overlay and content sit perfectly on top of the sliding backgrounds */
+.hero-overlay {
+  z-index: 1;
+}
+.hero .container {
+  position: relative;
+  z-index: 2;
+}
+    
+    
   </style>
 </head>
 <body>
@@ -266,29 +310,34 @@
 
     <!-- HERO STRATUM WITH PICTURE BACKGROUND -->
     <section class="hero" aria-label="SBL Architectural Introduction">
-      <img class="hero-bg-img" src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80" alt="SBL Elite Corporate Headquarters Glass Interior Background Picture" />
-      <div class="hero-overlay"></div>
-      <div class="container">
-        <div class="hero-content">
-          <p class="hero-eyebrow"><i class="fa-solid fa-gavel" style="margin-right: 8px;"></i> OFFICIAL ADVISORY PROFILE </p>
-          <h1 class="hero-title">Not built to serve systems.<span>Built to design, correct, and govern them.</span></h1>
-          <p class="hero-subtitle">A sovereign consulting house for decision-makers who understand that high-stakes counsel commands a premium and that the right architecture of governance is worth every fraction of it.</p>
-          <div class="hero-cta-group">
-            <a href="#portfolio" class="btn-brand">Explore Portfolio Architecture <i class="fa-solid fa-network-wired"></i></a>
-            <a href="#about" class="btn-brand" style="background:transparent; border-color:var(--border); color:var(--text)">Meet the Founder</a>
-          </div>
+    <div class="hero-slider">
+      <img class="hero-bg-img active" src="https://antiquewhite-jellyfish-508205.hostingersite.com/wp-content/uploads/2026/05/1080x1080.webp" alt="SBL Elite Corporate Headquarters Background Picture 1" />
+      <img class="hero-bg-img" src="https://antiquewhite-jellyfish-508205.hostingersite.com/wp-content/uploads/2026/05/515896546_10161698643475687_2667584239210047760_n.jpg" alt="SBL Elite Corporate Headquarters Background Picture 2" />
+      <img class="hero-bg-img" src="https://antiquewhite-jellyfish-508205.hostingersite.com/wp-content/uploads/2026/05/42688-swp-rule-of-40_16-9.webp" alt="SBL Elite Corporate Headquarters Background Picture 3" />
+    </div>
+    
+    <div class="hero-overlay"></div>
+    <div class="container">
+      <div class="hero-content">
+        <p class="hero-eyebrow"><i class="fa-solid fa-gavel" style="margin-right: 8px;"></i> OFFICIAL ADVISORY PROFILE </p>
+        <h1 class="hero-title">Not built to serve systems.<span>Built to design, correct, and govern them.</span></h1>
+        <p class="hero-subtitle">A sovereign consulting house for decision-makers who understand that high-stakes counsel commands a premium and that the right architecture of governance is worth every fraction of it.</p>
+        <div class="hero-cta-group">
+          <a href="#portfolio" class="btn-brand">Explore Portfolio Architecture <i class="fa-solid fa-network-wired"></i></a>
+          <a href="#about" class="btn-brand" style="background:transparent; border-color:var(--border); color:var(--text)">Meet the Founder</a>
         </div>
       </div>
-    </section>
-
+    </div>
+  </section>
+  
     <!-- COVENANT MANIFESTO STRATUM -->
     <section class="manifesto" aria-label="Philosophy Statement">
       <div class="container reveal">
         <i class="fa-solid fa-quote-left"></i>
         <blockquote class="manifesto-quote">
-          "Advisory is not a service. It is a covenant between authority and precision. We are selectively engaged. We are discretely operated. We are irreversibly effective[cite: 1]."
+          "Advisory is not a service. It is a covenant between authority and precision. We are selectively engaged. We are discretely operated."
         </blockquote>
-        <p style="font-size: var(--text-xs); letter-spacing: .2em; text-transform: uppercase; color: var(--gold);">— The SBL Standard[cite: 2]</p>
+        <p style="font-size: var(--text-xs); letter-spacing: .2em; text-transform: uppercase; color: var(--gold);">— SBL Global Advisory exists at the intersection of sovereign intelligence and operational mastery. We do not offer consultancy in the conventional sense  we offer something rarer: the architectural clarity to see what others cannot, the structural courage to correct what others will not, and the institutional authority to govern what others dare not.<br> We are selectively engaged. We are discretely operated. We are irreversibly effective.<br> Premier global advisory for decision-makers who understand that high-stakes counsel commands a premium — and that the right architecture of governance is worth every fraction of it.</p>
       </div>
     </section>
 
@@ -641,6 +690,29 @@
       document.getElementById('contact-form').style.display = 'none';
       document.getElementById('form-success').style.display = 'block';
     }
+    
+    document.addEventListener("DOMContentLoaded", () => {
+  const slides = document.querySelectorAll(".hero-slider .hero-bg-img");
+  let currentSlide = 0;
+  const slideInterval = 5000; // Change image every 5 seconds
+
+  function nextSlide() {
+    // Remove active state from current image
+    slides[currentSlide].classList.remove("active");
+    
+    // Move to next index, looping back to 0 at the end
+    currentSlide = (currentSlide + 1) % slides.length;
+    
+    // Add active state to next image
+    slides[currentSlide].classList.add("active");
+  }
+
+  // Run interval only if there are multiple background images
+  if (slides.length > 1) {
+    setInterval(nextSlide, slideInterval);
+  }
+});
+    
   </script>
 </body>
 </html>
