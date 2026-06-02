@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SBL Global Advisory — Authority. Structure. Governance.</title>
+  <meta name="description" content="SBL Global Advisory is a sovereign consulting house for decision-makers who understand that high-stakes advisory commands a premium fee. Founded by Sadia Asif, Founder and Chairperson." />
+
+  <!-- Typography & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=general-sans@300,400,500,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --text-xs: clamp(0.75rem,0.7rem + 0.25vw,0.875rem);
+      --text-sm: clamp(0.875rem,0.8rem + 0.35vw,1rem);
+      --text-base: clamp(1rem,0.95rem + 0.25vw,1.125rem);
+      --text-lg: clamp(1.125rem,1rem + 0.75vw,1.5rem);
+      --text-xl: clamp(1.5rem,1.2rem + 1.25vw,2.25rem);
+      --text-2xl: clamp(2rem,1.2rem + 2.5vw,3.5rem);
+      --text-3xl: clamp(2.5rem,1rem + 4vw,5rem);
+      --text-hero: clamp(3rem,0.5rem + 7vw,7.5rem);
+      
+      --space-4: 1rem; --space-6: 1.5rem; --space-8: 2rem; --space-10: 2.5rem; --space-12: 3rem; --space-16: 4rem; --space-24: 6rem; --space-32: 8rem;
+      --radius-sm: .25rem; --radius-md: .5rem; --radius-lg: .75rem; --radius-full: 9999px;
+      --transition: 400ms cubic-bezier(0.16, 1, 0.3, 1);
+      --content-default: 1000px; --content-wide: 1240px;
+      --font-display: 'Cormorant Garamond', 'Georgia', serif;
+      --font-body: 'General Sans', 'Helvetica Neue', sans-serif;
+
+      /* Dynamic Theme Variables (Default Dark Mode) */
+      --bg: #012116;
+      --surface: #033A27;
+      --surface2: #054d34;
+      --surface-off: #022d1e;
+      --divider: rgba(170, 140, 78, 0.2);
+      --border: rgba(170, 140, 78, 0.3);
+      --text: #eef5f2;
+      --text-muted: #a4beba;
+      --text-faint: #567e74;
+      --text-inv: #012116;
+      --gold: #AA8C4E;
+      --gold-hov: #c4a96c;
+      --shadow-lg: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    /* Light Mode Variables Override */
+    [data-theme="light"] {
+      --bg: #F4F7F5;
+      --surface: #FFFFFF;
+      --surface2: #E8EFEA;
+      --surface-off: #DFE8E2;
+      --divider: rgba(3, 58, 39, 0.1);
+      --border: rgba(3, 58, 39, 0.2);
+      --text: #033A27;
+      --text-muted: #2C5E4D;
+      --text-faint: #567e74;
+      --text-inv: #FFFFFF;
+      --gold: #AA8C4E;
+      --gold-hov: #8E7239;
+      --shadow-lg: 0 20px 40px rgba(3, 58, 39, 0.08);
+    }
+
+    *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; scroll-behavior: smooth; }
+    body { min-height: 100dvh; line-height: 1.65; font-family: var(--font-body); font-size: var(--text-base); color: var(--text); background-color: var(--bg); overflow-x: hidden; transition: background-color var(--transition), color var(--transition); }
+    button { cursor: pointer; background: none; border: none; font-family: var(--font-body); }
+    a { color: inherit; text-decoration: none; }
+    h1,h2,h3,h4 { text-wrap: balance; line-height: 1.15; font-weight: 300; }
+    
+    .container { max-width: var(--content-default); margin-inline: auto; padding-inline: clamp(var(--space-4), 5vw, var(--space-12)); }
+    .container--wide { max-width: var(--content-wide); margin-inline: auto; padding-inline: clamp(var(--space-4), 5vw, var(--space-12)); }
+
+    /* CORE ANIMATION FRAMEWORK */
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 800ms var(--transition), transform 800ms var(--transition); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    
+    @keyframes heroFadeUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes scaleImage {
+      0% { transform: scale(1.1); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* THEME TOGGLE FLOATER (Lightbulb Switch) */
+    .theme-switcher { position: fixed; bottom: var(--space-8); right: var(--space-8); z-index: 1000; width: 56px; height: 56px; background: #FFFFFF; color: #033A27; border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 25px rgba(0,0,0,0.25); border: 2px solid var(--gold); transition: transform var(--transition); }
+    .theme-switcher:hover { transform: scale(1.1) rotate(12deg); }
+    .theme-switcher i { font-size: 1.5rem; transition: transform var(--transition); }
+    [data-theme="light"] .theme-switcher { background: #033A27; color: #FFFFFF; }
+
+    /* UNIFIED BRAND BUTTONS */
+    .btn-brand { font-size: var(--text-xs); font-weight: 500; letter-spacing: .15em; text-transform: uppercase; padding: 1.1rem var(--space-10); background: var(--gold); color: #FFFFFF; border: 1px solid var(--gold); border-radius: var(--radius-sm); display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem; transition: all var(--transition); cursor: pointer; text-align: center; }
+    .btn-brand:hover { background: var(--gold-hov); border-color: var(--gold-hov); color: #FFFFFF; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(170, 140, 78, 0.3); }
+    .btn-brand i { font-size: 0.95rem; transition: transform var(--transition); }
+    .btn-brand:hover i { transform: translateX(4px); }
+
+    /* FIXED HEADER */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: var(--space-4) clamp(var(--space-4), 5vw, var(--space-12)); display: flex; align-items: center; justify-content: space-between; background: color-mix(in oklch, var(--bg) 90%, transparent); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--divider); transition: background var(--transition); }
+    .nav-logo { display: flex; align-items: center; gap: 0.75rem; }
+    .nav-logo i { font-size: 1.5rem; color: var(--gold); }
+    .nav-logo-text { font-family: var(--font-display); font-size: var(--text-lg); font-weight: 500; letter-spacing: .08em; color: var(--gold); }
+    .nav-links { display: flex; align-items: center; gap: var(--space-8); list-style: none; }
+    .nav-links a { font-size: var(--text-xs); font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--text-muted); transition: color var(--transition); }
+    .nav-links a:hover { color: var(--gold); }
+    
+    .btn-nav-cta { font-size: 10px; padding: 0.6rem 1.2rem; }
+
+    /* HERO STRATUM WITH VISUAL PICTURE BACKGROUND */
+    .hero { position: relative; min-height: 100dvh; display: flex; align-items: center; overflow: hidden; }
+    .hero-bg-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; filter: brightness(0.35); animation: scaleImage 1.8s var(--transition); }
+    [data-theme="light"] .hero-bg-img { filter: brightness(0.85) contrast(1.05); }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to right, var(--bg) 40%, transparent 100%); z-index: 1; }
+    .hero-content { position: relative; z-index: 2; padding-top: var(--space-24); max-width: 800px; animation: heroFadeUp 1.2s var(--transition) both; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.75rem; font-size: var(--text-xs); font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: var(--space-6); }
+    .hero-title { font-family: var(--font-display); font-size: var(--text-hero); font-style: italic; line-height: 1.05; color: var(--text); margin-bottom: var(--space-8); }
+    .hero-title span { color: var(--gold); font-style: normal; font-weight: 400; display: block; margin-top: 0.5rem; }
+    .hero-subtitle { font-size: var(--text-lg); font-weight: 300; color: var(--text-muted); max-width: 55ch; margin-bottom: var(--space-12); }
+    .hero-cta-group { display: flex; align-items: center; gap: var(--space-6); flex-wrap: wrap; }
+
+    /* TEXT SECTIONS */
+    section { padding-block: clamp(var(--space-16), 10vw, var(--space-32)); position: relative; }
+    .section-label { font-size: var(--text-xs); font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: var(--space-4); display: flex; align-items: center; gap: 0.75rem; }
+    .section-title { font-family: var(--font-display); font-size: var(--text-3xl); line-height: 1.15; color: var(--text); margin-bottom: var(--space-6); }
+    .section-body { font-size: var(--text-base); color: var(--text-muted); max-width: 65ch; line-height: 1.8; }
+
+    /* MANIFESTO */
+    .manifesto { background: var(--surface); border-top: 1px solid var(--divider); border-bottom: 1px solid var(--divider); text-align: center; transition: background var(--transition); }
+    .manifesto i { font-size: 2rem; color: var(--gold); margin-bottom: var(--space-6); display: block; }
+    .manifesto-quote { font-family: var(--font-display); font-size: var(--text-2xl); font-style: italic; line-height: 1.4; max-width: 840px; margin: 0 auto var(--space-6) auto; color: var(--text); }
+
+    /* FOUNDER IMAGE GRID LAYOUT */
+    .founder-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: var(--space-16); align-items: center; }
+    .founder-image-wrapper { position: relative; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); border: 1px solid var(--border); aspect-ratio: 4/5; }
+    .founder-img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--transition); }
+    .founder-image-wrapper:hover .founder-img { transform: scale(1.04); }
+    .founder-name { font-family: var(--font-display); font-size: var(--text-xl); color: var(--gold); margin-bottom: 0.25rem; }
+    .founder-title-role { font-size: var(--text-xs); letter-spacing: .2em; text-transform: uppercase; color: var(--text-faint); margin-bottom: var(--space-8); }
+    .founder-bio p { margin-bottom: var(--space-5); color: var(--text-muted); }
+    
+    .founder-credentials { display: flex; gap: var(--space-8); margin-top: var(--space-10); padding-top: var(--space-8); border-top: 1px solid var(--divider); }
+    .credential-item { display: flex; flex-direction: column; }
+    .credential-value { font-family: var(--font-display); font-size: var(--text-xl); font-weight: 500; color: var(--gold); }
+    .credential-label { font-size: var(--text-xs); letter-spacing: .15em; text-transform: uppercase; color: var(--text-faint); }
+
+    /* PHILOSOPHY TILES */
+    .philosophy { background: var(--surface); transition: background var(--transition); }
+    .philosophy-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-6); margin-top: var(--space-12); }
+    .philosophy-card { background: var(--surface2); padding: var(--space-10); border: 1px solid var(--divider); border-radius: var(--radius-lg); transition: all var(--transition); }
+    .philosophy-card:hover { background: var(--surface-off); border-color: var(--gold); transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .philosophy-header-inline { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-6); }
+    .philosophy-card i { font-size: 1.5rem; color: var(--gold); }
+    .philosophy-card-number { font-family: var(--font-display); font-size: var(--text-lg); color: var(--gold); opacity: 0.5; }
+    .philosophy-card-title { font-family: var(--font-display); font-size: var(--text-xl); color: var(--text); margin-bottom: var(--space-3); }
+    .philosophy-card-body { font-size: var(--text-sm); color: var(--text-muted); line-height: 1.8; }
+
+    /* PORTFOLIO & ENTITIES */
+    .companies-header { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-12); margin-bottom: var(--space-16); align-items: end; }
+    .companies-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-8); }
+    .company-card { border: 1px solid var(--border); border-radius: var(--radius-lg); transition: all var(--transition); background: var(--surface); overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow-lg); }
+    .company-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+    .company-card--full { grid-column: 1 / -1; display: grid; grid-template-columns: 1.2fr 1fr; }
+    .company-img-frame { width: 100%; height: 100%; min-height: 250px; overflow: hidden; position: relative; }
+    .company-photo { width: 100%; height: 100%; object-fit: cover; transition: transform var(--transition); }
+    .company-card:hover .company-photo { transform: scale(1.05); }
+    .company-card-content { padding: var(--space-10); display: flex; flex-direction: column; justify-content: center; }
+    .company-tag { font-size: var(--text-xs); letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: var(--space-3); display: flex; align-items: center; gap: 0.5rem; }
+    .company-name { font-family: var(--font-display); font-size: var(--text-2xl); color: var(--text); margin-bottom: var(--space-2); }
+    .company-tagline { font-size: var(--text-sm); color: var(--text-faint); margin-bottom: var(--space-6); font-style: italic; }
+    .company-capabilities { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: var(--space-6); padding-top: var(--space-6); border-top: 1px solid var(--divider); }
+    .capability-tag { font-size: var(--text-xs); padding: var(--space-1) var(--space-3); border: 1px solid var(--border); color: var(--text-muted); border-radius: var(--radius-sm); }
+
+    /* ENGAGEMENT ARCHITECTURE */
+    .engagement { background: var(--surface); transition: background var(--transition); }
+    .engagement-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); margin-top: var(--space-12); }
+    .engagement-card { padding: var(--space-10); background: var(--bg); border: 1px solid var(--divider); border-radius: var(--radius-lg); transition: all var(--transition); }
+    .engagement-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+    .engagement-icon-box { width: 48px; height: 48px; background: rgba(170, 140, 78, 0.1); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: var(--gold); margin-bottom: var(--space-6); font-size: 1.25rem; }
+    .engagement-title { font-family: var(--font-display); font-size: var(--text-xl); color: var(--text); margin-bottom: var(--space-4); }
+    .engagement-body { font-size: var(--text-sm); color: var(--text-muted); line-height: 1.8; }
+
+    /* PRINCIPLES INFOGRAPHIC */
+    .principles-list { margin-top: var(--space-12); }
+    .principle-item { display: grid; grid-template-columns: auto 1fr; gap: var(--space-8); padding-block: var(--space-8); border-bottom: 1px solid var(--divider); }
+    .principle-item:first-child { border-top: 1px solid var(--divider); }
+    .principle-icon-wrapper { width: 44px; height: 44px; border: 1px solid var(--border); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: var(--text-xs); font-family: var(--font-display); }
+
+    /* SECURE CALL TO ACTION */
+    .mandate-cta { background: linear-gradient(rgba(3, 58, 39, 0.9), rgba(3, 58, 39, 0.9)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1400&q=80') no-repeat center/cover; text-align: center; padding-block: var(--space-24); border-radius: var(--radius-lg); margin-inline: clamp(var(--space-4), 5vw, var(--space-12)); box-shadow: var(--shadow-lg); }
+    .mandate-title { font-family: var(--font-display); font-size: var(--text-3xl); font-style: italic; color: #FFFFFF; margin-bottom: var(--space-6); }
+    .mandate-body { color: rgba(255,255,255,0.8); max-width: 60ch; margin: 0 auto var(--space-10) auto; }
+
+    /* FORM SYSTEM SPECIFIC RE-ENGINEERING */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: var(--space-16); margin-top: var(--space-12); align-items: start; }
+    .contact-detail { display: flex; flex-direction: column; gap: var(--space-6); margin-top: var(--space-8); padding-top: var(--space-8); border-top: 1px solid var(--divider); }
+    .contact-detail-item { display: flex; gap: var(--space-4); }
+    .contact-detail-item i { color: var(--gold); font-size: 1.2rem; margin-top: 4px; }
+    
+    /* ENHANCED FORM ELEMENTS */
+    .contact-form-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--space-12); box-shadow: var(--shadow-lg); transition: background var(--transition); }
+    .form-group { margin-bottom: var(--space-6); position: relative; }
+    .form-group label { display: block; font-size: var(--text-xs); font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.75rem; }
+    
+    .form-control { width: 100%; padding: 1.15rem var(--space-6); background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-md); color: var(--text); font-size: var(--text-sm); font-family: var(--font-body); transition: all var(--transition); outline: none; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); }
+    .form-control:focus { border-color: var(--gold); background: var(--surface-off); box-shadow: 0 0 0 4px rgba(170, 140, 78, 0.15); }
+    
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+    textarea.form-control { min-height: 160px; resize: vertical; }
+    select.form-control { appearance: none; cursor: pointer; }
+    .select-wrapper { position: relative; }
+    .select-wrapper::after { content: '\f107'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; right: var(--space-6); top: 50%; transform: translateY(-120%); color: var(--text-muted); pointer-events: none; }
+
+    /* FOOTER STRATUM */
+    footer { background: var(--surface); border-top: 1px solid var(--divider); padding-block: var(--space-16) var(--space-8); transition: background var(--transition); }
+    .footer-grid { display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: var(--space-12); margin-bottom: var(--space-12); }
+    .footer-brand p { font-size: var(--text-sm); color: var(--text-muted); margin-top: var(--space-4); max-width: 35ch; }
+    .footer-col h4 { font-size: var(--text-xs); letter-spacing: .15em; text-transform: uppercase; color: var(--text-faint); margin-bottom: var(--space-6); }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+    .footer-col ul a { font-size: var(--text-sm); color: var(--text-muted); transition: color var(--transition); }
+    .footer-col ul a:hover { color: var(--gold); }
+    .footer-bottom { padding-top: var(--space-8); border-top: 1px solid var(--divider); display: flex; justify-content: space-between; font-size: var(--text-xs); color: var(--text-faint); flex-wrap: wrap; gap: var(--space-4); }
+
+    @media(max-width: 960px){
+      .nav-links, .btn-nav-cta { display: none; }
+      .founder-grid, .philosophy-grid, .companies-grid, .engagement-grid, .contact-grid { grid-template-columns: 1fr; }
+      .company-card--full { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .companies-header { grid-template-columns: 1fr; gap: var(--space-4); }
+      .form-row { grid-template-columns: 1fr; gap: 0; }
+    }
+    @media(max-width: 600px) {
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LIGHTBULB FLOATING THEME SWAP SWITCHER[cite: 1] -->
+  <button class="theme-switcher" id="themeBtn" onclick="toggleTheme()" aria-label="Switch interface mood lighting">
+    <i class="fa-solid fa-lightbulb"></i>
+  </button>
+
+  <!-- NAVIGATION STRATUM -->
+<nav role="navigation" aria-label="Primary Domain Architecture">
+    <div class="nav-logo">
+      <img src="/img/sbl logo white.webp" alt="SBL Global Advisory Logo" style="height: 32px; width: auto; object-fit: contain;">
+      <span class="nav-logo-text">Global Advisory</span>
+    </div>
+    <ul class="nav-links" role="list">
+      <li><a href="#about">The Founder</a></li>
+      <li><a href="#portfolio">Strategic Entities</a></li>
+      <li><a href="#architecture">Framework</a></li>
+      <li><a href="#engage">Secure Intake</a></li>
+    </ul>
+    <div>
+      <a href="#engage" class="btn-brand btn-nav-cta">Submit Mandate <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </nav>
+
+  <main id="main">
+
+    <!-- HERO STRATUM WITH PICTURE BACKGROUND -->
+    <section class="hero" aria-label="SBL Architectural Introduction">
+      <img class="hero-bg-img" src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80" alt="SBL Elite Corporate Headquarters Glass Interior Background Picture" />
+      <div class="hero-overlay"></div>
+      <div class="container">
+        <div class="hero-content">
+          <p class="hero-eyebrow"><i class="fa-solid fa-gavel" style="margin-right: 8px;"></i> OFFICIAL ADVISORY PROFILE </p>
+          <h1 class="hero-title">Not built to serve systems.<span>Built to design, correct, and govern them.</span></h1>
+          <p class="hero-subtitle">A sovereign consulting house for decision-makers who understand that high-stakes counsel commands a premium and that the right architecture of governance is worth every fraction of it.</p>
+          <div class="hero-cta-group">
+            <a href="#portfolio" class="btn-brand">Explore Portfolio Architecture <i class="fa-solid fa-network-wired"></i></a>
+            <a href="#about" class="btn-brand" style="background:transparent; border-color:var(--border); color:var(--text)">Meet the Founder</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COVENANT MANIFESTO STRATUM -->
+    <section class="manifesto" aria-label="Philosophy Statement">
+      <div class="container reveal">
+        <i class="fa-solid fa-quote-left"></i>
+        <blockquote class="manifesto-quote">
+          "Advisory is not a service. It is a covenant between authority and precision. We are selectively engaged. We are discretely operated. We are irreversibly effective[cite: 1]."
+        </blockquote>
+        <p style="font-size: var(--text-xs); letter-spacing: .2em; text-transform: uppercase; color: var(--gold);">— The SBL Standard[cite: 2]</p>
+      </div>
+    </section>
+
+    <!-- FOUNDER PROFILE STRATUM WITH EXECUTIVE PROFILE PICTURE -->
+    <section id="about" aria-label="Leadership Profile">
+      <div class="container">
+        <div class="founder-grid">
+          <div class="founder-image-wrapper reveal">
+            <img class="founder-img" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" alt="Dr. Sadia Asif, Founder and Chairperson of SBL Global Advisory Picture" />
+          </div>
+          <div class="reveal">
+            <p class="section-label"><i class="fa-solid fa-user-tie"></i> Founder &amp; Chairperson</p>
+            <h2 class="founder-name">Sadia Asif</h2>
+            <div class="founder-title-role">SBL Global Advisory Hub</div>
+            <div class="founder-bio">
+              <p>Dr. Sadia Asif is not a consultant you retain when things go wrong. She is the authority you engage when you refuse to allow things to go wrong[cite: 1]. When the decisions ahead are consequential enough that approximation is a liability you cannot afford[cite: 1].</p>
+              <p>As Founder and Chairperson of SBL Global Advisory, Dr. Sadia operates at the highest echelon of cross-sector governance spanning artificial intelligence strategy, marine and terrestrial trade architecture, and deep-research intelligence[cite: 1]. Her engagements are not assignments. They are interventions[cite: 1].</p>
+              <p>She has designed frameworks for organizations operating under conditions of complexity where conventional advisory fails[cite: 1]. She has corrected structures others had given up on[cite: 1]. She has governed transitions others had deemed ungovernable[cite: 1].</p>
+            </div>
+            <div class="founder-credentials">
+              <div class="credential-item">
+                <span class="credential-value"><i class="fa-solid fa-layer-group"></i> 03</span>
+                <span class="credential-label">Core Verticals</span>
+              </div>
+              <div class="credential-item">
+                <span class="credential-value"><i class="fa-solid fa-earth-americas"></i> Global</span>
+                <span class="credential-label">Sovereign Focus</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ENGAGEMENT ETHOS TILES -->
+    <section class="philosophy" aria-label="Governing Engagement Principles">
+      <div class="container">
+        <p class="section-label reveal"><i class="fa-solid fa-shield-halved"></i> Engagement Ethos</p>
+        <h2 class="section-title reveal">SBL Global Advisory is not a marketplace.<br>These are the terms of our world[cite: 1].</h2>
+        <div class="philosophy-grid">
+          <div class="philosophy-card reveal">
+            <div class="philosophy-header-inline">
+              <i class="fa-solid fa-calendar-check"></i>
+              <div class="philosophy-card-number">01</div>
+            </div>
+            <h3 class="philosophy-card-title">By Appointment Only</h3>
+            <p class="philosophy-card-body">Access to SBL advisory is not applied for — it is granted[cite: 1]. We engage exclusively with principals and decision-makers at the highest institutional level[cite: 1]. Intermediaries are not received[cite: 1].</p>
+          </div>
+          <div class="philosophy-card reveal">
+            <div class="philosophy-header-inline">
+              <i class="fa-solid fa-ban"></i>
+              <div class="philosophy-card-number">02</div>
+            </div>
+            <h3 class="philosophy-card-title">No Free Consultations</h3>
+            <p class="philosophy-card-body">Our expertise has no sample tier[cite: 1]. Every interaction is intentional and charged accordingly[cite: 1]. We have no discovery calls, no complimentary sessions, no trial engagements[cite: 1].</p>
+          </div>
+          <div class="philosophy-card reveal">
+            <div class="philosophy-header-inline">
+              <i class="fa-solid fa-coins"></i>
+              <div class="philosophy-card-number">03</div>
+            </div>
+            <h3 class="philosophy-card-title">Premium Fees, Non-Negotiable</h3>
+            <p class="philosophy-card-body">High-stakes advisory commands a premium fee — not as an expression of ego but as a filter for seriousness[cite: 1]. Clients who understand value do not negotiate the cost of certainty[cite: 1].</p>
+          </div>
+          <div class="philosophy-card reveal">
+            <div class="philosophy-header-inline">
+              <i class="fa-solid fa-eye-slash"></i>
+              <div class="philosophy-card-number">04</div>
+            </div>
+            <h3 class="philosophy-card-title">Absolute Discretion</h3>
+            <p class="philosophy-card-body">Every engagement operates under sovereign-grade confidentiality[cite: 1]. Client identity, strategic context, and operational intelligence are never disclosed[cite: 1]. Ever[cite: 1].</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO VERTICAL ENHANCED WITH PICTURES -->
+    <section id="portfolio" aria-label="Portfolio of Entities">
+      <div class="container--wide">
+        <div class="companies-header reveal">
+          <div>
+            <p class="section-label"><i class="fa-solid fa-folder-open"></i> Portfolio of Entities</p>
+            <h2 class="section-title">Three Domains.<br>One Governing Intelligence[cite: 1].</h2>
+          </div>
+          <div>
+            <p class="section-body">Each entity under SBL Global Advisory operates at the frontier of its domain — led by the same commitment to structural excellence and institutional authority[cite: 1]. Three disciplines[cite: 1]. One philosophy[cite: 1]. Zero compromise[cite: 1].</p>
+          </div>
+        </div>
+        
+        <div class="companies-grid">
+          <!-- SBL Tech -->
+          <div class="company-card company-card--full reveal">
+            <div class="company-img-frame">
+              <img class="company-photo" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=700&q=80" alt="Tech servers and premium artificial intelligence concept picture" />
+            </div>
+            <div class="company-card-content">
+              <p class="company-tag"><i class="fa-solid fa-microchip"></i> 01 — AI &amp; Strategy</p>
+              <h3 class="company-name">SBL Consulting Technology</h3>
+              <p class="company-tagline">"We don't install technology. We install competitive advantage[cite: 1]."</p>
+              <p class="company-description">SBL Consulting Technology architects AI ecosystems, deploys augmented intelligence frameworks, and engineers enterprise technology strategies that define the future[cite: 1].</p>
+              <div class="company-capabilities">
+                <span class="capability-tag">Artificial Intelligence</span>
+                <span class="capability-tag">Digital Governance</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sebulun Terra Marine -->
+          <div class="company-card reveal">
+            <div class="company-img-frame" style="height: 220px;">
+              <img class="company-photo" src="https://images.unsplash.com/photo-1524522173746-f628baad3644?auto=format&fit=crop&w=600&q=80" alt="Cargo vessel at sea trade background picture" />
+            </div>
+            <div class="company-card-content">
+              <p class="company-tag"><i class="fa-solid fa-ship"></i> 02 — Global Trade</p>
+              <h3 class="company-name">Sebulun Terra Marine</h3>
+              <p class="company-tagline">"Trade is not logistics. Trade is leverage[cite: 1]."</p>
+              <p class="company-description">Commands the architecture of global commodity movement — where terrestrial corridors meet maritime lanes and trade intelligence becomes competitive leverage[cite: 1].</p>
+            </div>
+          </div>
+
+          <!-- Owlnocular -->
+          <div class="company-card reveal">
+            <div class="company-img-frame" style="height: 220px;">
+              <img class="company-photo" src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80" alt="Deep structural global metrics picture background" />
+            </div>
+            <div class="company-card-content">
+              <p class="company-tag"><i class="fa-solid fa-graduation-cap"></i> 03 — Research &amp; Development</p>
+              <h3 class="company-name">Owlnocular</h3>
+              <p class="company-tagline">"Intelligence that arrives before the question is formed[cite: 1]."</p>
+              <p class="company-description">The intellectual engine of SBL Global Advisory — producing high-fidelity structural foresight matrices and independent technological analysis[cite: 1].</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ENGAGEMENT ARCHITECTURE WITH ICONS -->
+    <section id="architecture" class="engagement" aria-label="How We Operate">
+      <div class="container">
+        <p class="section-label reveal"><i class="fa-solid fa-sitemap"></i> How We Work</p>
+        <h2 class="section-title reveal">The Engagement Architecture</h2>
+        
+        <div class="engagement-grid">
+          <div class="engagement-card reveal">
+            <div class="engagement-icon-box"><i class="fa-solid fa-file-signature"></i></div>
+            <h3 class="engagement-title">Mandate-First</h3>
+            <p class="engagement-body">Every engagement begins with a clear written mandate outlining exact parameters and expected governance changes before work commences[cite: 1].</p>
+          </div>
+          <div class="engagement-card reveal">
+            <div class="engagement-icon-box"><i class="fa-solid fa-crown"></i></div>
+            <h3 class="engagement-title">Principal Access</h3>
+            <p class="engagement-body">SBL coordinates exclusively with corporate leaders, boards, and sovereign stakeholders directly. Intermediaries are bypassed entirely[cite: 1].</p>
+          </div>
+          <div class="engagement-card reveal">
+            <div class="engagement-icon-box"><i class="fa-solid fa-gem"></i></div>
+            <h3 class="engagement-title">Premium Value</h3>
+            <p class="engagement-body">Fees reflect the absolute weight of accountability and strategic clarity brought to your organizational structure[cite: 1].</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OPERATING PRINCIPLES SECTION -->
+    <section aria-label="Operational Limits">
+      <div class="container">
+        <p class="section-label reveal"><i class="fa-solid fa-hand"></i> Operating Limits</p>
+        <h2 class="section-title reveal">What We Do Not Do</h2>
+        <div class="principles-list">
+          <div class="principle-item reveal">
+            <div class="principle-icon-wrapper"><i class="fa-solid fa-circle-xmark"></i></div>
+            <div style="padding-left:1.5rem;">
+              <h3 style="font-family:var(--font-display); font-size:var(--text-xl); margin-bottom:0.5rem;">No Free Samples</h3>
+              <p style="font-size:var(--text-sm); color:var(--text-muted);">Discovery calls do not exist here[cite: 1]. Initial contact is handled exclusively via written mandate evaluation[cite: 1].</p>
+            </div>
+          </div>
+          <div class="principle-item reveal">
+            <div class="principle-icon-wrapper"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <div style="padding-left:1.5rem;">
+              <h3 style="font-family:var(--font-display); font-size:var(--text-xl); margin-bottom:0.5rem;">No Consensus Biases</h3>
+              <p style="font-size:var(--text-sm); color:var(--text-muted);">We supply reality without compromise, avoiding safe or filtered corporate committee statements[cite: 1].</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HIGH PROFILE CTA -->
+    <section class="container" aria-label="Action Request Context">
+      <div class="mandate-cta reveal">
+        <h2 class="mandate-title">If you have arrived here, you already know[cite: 1].</h2>
+        <p class="mandate-body">High-caliber advisory is not discovered through public channels[cite: 1]. If you are looking to build, correct, or change structures, submit your clear corporate directive below[cite: 1].</p>
+        <a href="#engage" class="btn-brand">Go to Secure Intake <i class="fa-solid fa-angles-down"></i></a>
+      </div>
+    </section>
+
+    <!-- INTAKE SECURE SYSTEM WITH RE-STYLED LARGE INPUT CELLS -->
+    <section id="engage" aria-label="Intake Channels">
+      <div class="container">
+        <p class="section-label reveal"><i class="fa-solid fa-envelope-open-text"></i> Intake Ecosystem</p>
+        <h2 class="section-title reveal">Secure Mandate Channel[cite: 1]</h2>
+        
+        <div class="contact-grid">
+          <div class="contact-info reveal">
+            <p class="section-body">Enquiries are processed directly through the office of Chairperson Sadia Asif[cite: 1]. Communication is established solely with verified organizational principals[cite: 1].</p>
+            
+            <div class="contact-detail">
+              <div class="contact-detail-item">
+                <i class="fa-solid fa-hashtag"></i>
+                <div>
+                  <span class="contact-detail-label">Direct Secure Matrix</span>
+                  <span class="contact-detail-value" style="display:block; color:var(--text); font-weight:500;">advisory@sblglobal.com[cite: 1]</span>
+                </div>
+              </div>
+              <div class="contact-detail-item">
+                <i class="fa-solid fa-location-dot"></i>
+                <div>
+                  <span class="contact-detail-label">Operations Centre</span>
+                  <span class="contact-detail-value" style="display:block; color:var(--text);">Rahim Yar Khan, Punjab, Pakistan &mdash; Global[cite: 1]</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ENHANCED FORM WITH RE-STYLED LARGE EXPANSIVE INPUT FIELD CELLS -->
+          <div class="contact-form-wrap reveal">
+            <form id="contact-form" onsubmit="handleFormSubmit(event)">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="name">Your Identity</label>
+                  <input type="text" id="name" class="form-control" placeholder="Full Legal Name" required />
+                </div>
+                <div class="form-group">
+                  <label for="org">Institution</label>
+                  <input type="text" id="org" class="form-control" placeholder="Company Name" required />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="title">Official Title</label>
+                  <input type="text" id="title" class="form-control" placeholder="e.g. Director, Principal" required />
+                </div>
+                <div class="form-group">
+                  <label for="email">Secure Email</label>
+                  <input type="email" id="email" class="form-control" placeholder="name@domain.com" required />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="division">Domain Verticals</label>
+                <div class="select-wrapper">
+                  <select id="division" class="form-control" required>
+                    <option value="" disabled selected>Select Core Sector Focus</option>
+                    <option>SBL Global Advisory — Corporate Governance</option>
+                    <option>SBL Consulting Technology — AI Frameworks</option>
+                    <option>Sebulun Terra Marine — Supply Systems</option>
+                    <option>Owlnocular — Analytical Research Focus</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="mandate-text">State Your Structural Mandate</label>
+                <textarea id="mandate-text" class="form-control" placeholder="Detail your exact governance hurdle or strategic milestone parameters cleanly[cite: 1]." required></textarea>
+              </div>
+              <button type="submit" class="btn-brand" style="width:100%;">Submit Formal Mandate <i class="fa-solid fa-paper-plane"></i></button>
+            </form>
+
+            <div id="form-success" style="display:none; text-align:center; padding-block: var(--space-4);">
+              <i class="fa-solid fa-circle-check" style="color:var(--gold); font-size:2.5rem; margin-bottom:1rem;"></i>
+              <p style="font-family: var(--font-display); font-size: var(--text-xl); color: var(--gold); margin-bottom: 0.5rem;">Mandate Received.</p>
+              <p style="font-size: var(--text-sm); color: var(--text-muted)">Your submission has been cataloged. If your directive meets foundational criteria, response protocols will initialize[cite: 1].</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ARCHITECTURAL FOOTER STRATUM -->
+  <footer role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="nav-logo-text" style="padding-left:0;"><i class="fa-solid fa-building-shield"></i> SBL Global</span>
+          <p>Sovereign corporate architecture for leaders requiring verified clarity and independent analytical advice[cite: 1].</p>
+        </div>
+        <div class="footer-col">
+          <h4>Domains</h4>
+          <ul role="list">
+            <li><a href="#portfolio">AI &amp; Tech Systems</a></li>
+            <li><a href="#portfolio">Maritime Comm</a></li>
+            <li><a href="#portfolio">Owlnocular Intelligence</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Intake</h4>
+          <ul role="list">
+            <li><a href="#about">The Chair</a></li>
+            <li><a href="#architecture">Framework</a></li>
+            <li><a href="#engage">Submit Directive</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul role="list">
+            <li><a href="#architecture">SBL Code</a></li>
+            <li><a href="#architecture">Confidentiality</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 SBL Global Advisory. All rights reserved. Dr. Sadia Asif, Founder &amp; Chairperson[cite: 1].</p>
+        <p>Rahim Yar Khan, Punjab, Pakistan &nbsp;&middot;&nbsp; Global Footprint[cite: 1]</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT ARCHITECTURE -->
+  <script>
+    function toggleTheme() {
+      const htmlElement = document.documentElement;
+      const themeBtnIcon = document.querySelector('#themeBtn i');
+      
+      if (htmlElement.getAttribute('data-theme') === 'light') {
+        htmlElement.setAttribute('data-theme', 'dark');
+        themeBtnIcon.className = 'fa-solid fa-lightbulb';
+      } else {
+        htmlElement.setAttribute('data-theme', 'light');
+        themeBtnIcon.className = 'fa-regular fa-lightbulb';
+      }
+    }
+
+    function revealAnimation() {
+      const reveals = document.querySelectorAll('.reveal');
+      for (let i = 0; i < reveals.length; i++) {
+        const windowHeight = window.innerHeight;
+        const elementTop = reveals[i].getBoundingClientRect().top;
+        const elementVisible = 100;
+        
+        if (elementTop < windowHeight - elementVisible) {
+          reveals[i].classList.add('active');
+        }
+      }
+    }
+
+    window.addEventListener('scroll', revealAnimation);
+    window.addEventListener('load', revealAnimation);
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      document.getElementById('contact-form').style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
